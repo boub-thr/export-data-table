@@ -1,0 +1,102 @@
+<div class="data-table">
+  <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="export-table">
+    <div>
+      <mat-form-field class="table-search">
+        <input matInput (keyup)="searchT($event.target.value)" placeholder="Cherche ..">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row wrap" class="export-action">
+      <button mat-raised-button color="primary">
+        <mat-icon>print</mat-icon> Imprimer
+      </button>
+      <button mat-raised-button color="primary">
+        <mat-icon>picture_as_pdf</mat-icon> Export PDF
+      </button>
+      <button mat-raised-button color="primary"  (click)="exporter.exportTable('csv')">
+        <mat-icon>grid_on</mat-icon> Export XLS
+      </button>
+    </div>
+  </div>
+  <div class="mat-elevation-z8">
+    <mat-table *ngIf="dataSourceCommandes.data" matTableExporter [dataSource]="dataSourceCommandes"  #exporter="matTableExporter"  matSort>
+
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Identifiant</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Identifiant">{{ element.id }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="commandeDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Date de Commande</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Date de Commande">
+          {{ element.commandeDate | date: "dd/MM/yyyy" }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="client">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Client</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Client">
+          {{ element.client.raisonSocial}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="ref">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="ref">Référence</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Réference">
+          {{ element.ref }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="natureOfGoods">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Nature Marchandises</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Nature Marchandises">
+          {{ element.natureOfGoods }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="tarif">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Tarif de Commande</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Tarif de Commande">
+          {{ element.tarif }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="commandeProprity">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Véhicule utilisé</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Propre/affreter">
+          {{element.idEnsembleRoutier? "Propre" : "Affreter"}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="secondeChauffeur">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Normale/Rapide</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Normale/Rapide">
+          {{element.idEnsembleRoutier ? ((element.externalDriver || element.idChauffeur)? "Rapide" : "Normale") : "-"}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="deliveryDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Date Livraison</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Date Livraison">
+          {{ element.deliveryDate? (element.deliveryDate | date: "dd/MM/yyyy" ) : "-"}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="commandeStatus">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Etat de Commande</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Etat de Commande">
+          {{ showCommandStatusLibelle(element.commandeStatus) }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="paid">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Statut Paiement</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Statut Paiement">
+          {{ element.paid ? "Payée " : "Impayée" }}
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[ 5, 10, 20, 30]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

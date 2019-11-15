@@ -1,0 +1,16 @@
+.data-table{
+  margin: 1rem;
+  margin-top: 2.5rem;
+}
+.export-action button {
+  margin-right: 0.5rem;
+}
+.export-action button {
+  font-size: 12px;
+  padding: 0 6px 0 0;
+  line-height: normal;
+}
+.table-search {
+  margin-top: -0.8rem;
+  margin-bottom: -0.5rem;
+}
