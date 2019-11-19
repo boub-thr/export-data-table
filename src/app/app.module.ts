@@ -7,7 +7,8 @@ import { DataTablesComponent } from "./data-tables/data-tables.component";
 import { HttpClientModule } from "@angular/common/http";
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { MatTableExporterModule } from 'mat-table-exporter';
-import { MatTableModule, MatSortModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule } from "@angular/material";
+import { MatTableModule, MatSortModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatPaginatorIntl } from "@angular/material";
+import { MatPaginatorIntlFr } from './shared/mat-table-pagination-translate';
 
 @NgModule({
   declarations: [AppComponent, DataTablesComponent],
@@ -25,7 +26,7 @@ import { MatTableModule, MatSortModule, MatPaginatorModule, MatFormFieldModule, 
     FlexLayoutModule,
     MatTableExporterModule
   ],
-  providers: [],
+  providers: [{ provide: MatPaginatorIntl, useClass: MatPaginatorIntlFr}],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

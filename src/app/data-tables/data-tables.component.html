@@ -1,24 +1,24 @@
-<div class="data-table">
-  <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="export-table">
-    <div>
-      <mat-form-field class="table-search">
-        <input matInput (keyup)="searchT($event.target.value)" placeholder="Cherche ..">
-      </mat-form-field>
-    </div>
-    <div fxLayout="row wrap" class="export-action">
-      <button mat-raised-button color="primary">
-        <mat-icon>print</mat-icon> Imprimer
-      </button>
-      <button mat-raised-button color="primary">
-        <mat-icon>picture_as_pdf</mat-icon> Export PDF
-      </button>
-      <button mat-raised-button color="primary"  (click)="exporter.exportTable('csv')">
-        <mat-icon>grid_on</mat-icon> Export XLS
-      </button>
-    </div>
-  </div>
-  <div class="mat-elevation-z8">
-    <mat-table *ngIf="dataSourceCommandes.data" matTableExporter [dataSource]="dataSourceCommandes"  #exporter="matTableExporter"  matSort>
+<div class="data-table" >
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="export-table">
+        <div>
+          <mat-form-field class="table-search">
+            <input matInput (keyup)="searchT($event.target.value)" placeholder="Cherche ..">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row wrap" class="export-action">
+          <button mat-raised-button color="primary">
+            <mat-icon>print</mat-icon> Imprimer
+          </button>
+          <button mat-raised-button color="primary" (click)="print()">
+            <mat-icon>picture_as_pdf</mat-icon> Export PDF
+          </button>
+          <button mat-raised-button color="primary"  (click)="exporter.exportTable('xls')">
+            <mat-icon>grid_on</mat-icon> Export XLS
+          </button>
+        </div>
+      </div>
+  <div  class="mat-elevation-z8">
+    <mat-table  matTableExporter [dataSource]="dataSourceCommandes"  #exporter="matTableExporter"  matSort>
 
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Identifiant</mat-header-cell>
